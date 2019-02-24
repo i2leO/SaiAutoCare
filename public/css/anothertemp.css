@@ -1,0 +1,72 @@
+.dt-buttons{
+   /*background-color: #4CAF50; /* Green */
+    border: none;
+    padding: 10px 20px;
+    margin-left:300px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+   
+}
+ 
+
+.buttons-csv{
+  background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding:5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.buttons-pdf{
+  background-color: #008CBA; /* Green */
+    border: none;
+    color: white;
+    padding:5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.buttons-excel{
+  background-color: #e7e7e7; /* Green */
+    border: none;
+    color: black;
+    padding:5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.buttons-print{
+  background-color: #555555; /* Green */
+    border: none;
+    color: white;
+    padding:5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+input[type=search] {  
+   border-radius:15px; 
+    -moz-border-radius:15px; 
+    -webkit-border-radius:15px;
+}
+div.dataTables_length label {
+  font-weight: normal;
+  float: left;
+  text-align: left;
+}
+
+
