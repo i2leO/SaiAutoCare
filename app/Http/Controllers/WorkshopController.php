@@ -282,7 +282,10 @@ class WorkshopController extends Controller
     public function view(Request $request)
     {
            $viewData['header_link'] =  HeaderLink::where("menu_id",'3')->select("link_title","link_name")->orderBy('id','desc')->get();
-        if($request->isMethod('post'))
+        $viewData['model_select'] = Modal::pluck('model_name', 'id');
+        $viewData['brand_select'] = Brand::pluck('brand_name', 'id');
+         $viewData['customerNameSelect'] = Customer::pluck('customer_name', 'id');
+        if($request->isMethod('post')) 
         {
             $viewData['pageTitle'] = 'Add Party';           
             $workshop= DB::table('workshops');
@@ -293,8 +296,8 @@ class WorkshopController extends Controller
             if($request->has('id') && $request->id !=''){
                 $workshop->where('workshops.id', '=', $request->id);
             }
-            if($request->has('name') && $request->name !=''){
-                $workshop->where('workshops.name', 'like', '%'.$request->name.'%');
+            if($request->has('customer_id') && $request->customer_id !=''){
+                $workshop->where('workshops.customer_id', '=', $request->customer_id);
             }
             if($request->has('created_at_from') && $request->created_at_from !=''){
                 $workshop->whereDate('workshops.created_at', '<=', $request->created_at_from);
@@ -308,15 +311,19 @@ class WorkshopController extends Controller
             if($request->has('email') && $request->email !=''){
                 $workshop->where('workshops.email', '=', $request->email);
             }
-             if($request->has('vehicle_reg_number_for_search') && $request->vehicle_reg_number_for_search !=''){
-                $workshop->where('workshops.vehicle_reg_number', '=', $request->vehicle_reg_number_for_search);
+            if($request->has('vehicle_reg_number_for_search') && $request->vehicle_reg_number_for_search !=''){
+                $workshop->where('workshops.vehicle_reg_number', 'like', '%'.$request->vehicle_reg_number_for_search.'%');
+            }
+             if($request->has('brand') && $request->brand !=''){
+                $workshop->where('workshops.brand', '=', $request->brand);
+            }
+             if($request->has('model_number') && $request->model_number !=''){
+                 $workshop->where('workshops.model_number', '=', $request->model_number);
             }
             $workshop->select('workshops.*','brands.brand_name as company_name_from_brand','modals.model_name as modelNumber');
             $workshop->orderBy('id','desc');
             $workshop= $workshop->get();
             $viewData['workshop']=json_decode(json_encode($workshop), true);
-            // print_r($viewData['workshop']);
-            // exit;
             return view('SaiAutoCare.workshop.search', $viewData)->with($getFormAutoFillup);
 
         }else

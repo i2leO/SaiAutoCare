@@ -866,8 +866,7 @@
                  
                   <div class="col-sm-4">Total Product Price : <b id="total_Product_amount"></b></div>
                   <div class="col-sm-4">&emsp;</div>
-                    {{-- <input type="number" class="form-control" step="any" name="total_Product_amount" readonly="true"></div> --}}
-                  {{-- <div class="col-sm-4">&emsp;</div> --}}
+                    
                    <div class="col-sm-4">Grand Total : <b id="total_grand_amount"></b></div>
                 </div>
             </div>
@@ -880,12 +879,25 @@
 
 
                 <div class="row">
-                         <div class="col-md-6">
+                         <div class="col-md-4">
                         <div class="form-group">
                           <label class="control-label"  for="submited_part">Submited Part:&emsp;</label>
                            {{Form::textarea('submited_part',isset($submited_part)?$submited_part: '', ['class' => 'form-control ','style' => 'height:90px' ])}}
                           <div class="invalid-feedback">
                           {{ $errors->has('submited_part') ? $errors->first('submited_part', ':message') : '' }}
+                          </div>
+                        </div>
+                      </div> 
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="control-label"  for="submited_part"> GST:&emsp;</label>
+                            {{Form::select('serviceGST',['1'=>'Include GST','0'=>'Exclude GST'],isset($serviceGST)?$serviceGST: '', ['class' => 'form-control selectToW2_es'] )}}
+                       {{--   <select name="serviceGST" class="form-control">
+                           <option value="1">Include GST</option>
+                           <option value="0">Exclude GST</option>
+                         </select> --}}
+                          <div class="invalid-feedback">
+                          {{ $errors->has('serviceGST') ? $errors->first('serviceGST', ':message') : '' }}
                           </div>
                         </div>
                       </div>  

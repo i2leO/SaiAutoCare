@@ -22,7 +22,7 @@
          {{ Form::open(['url' => 'SaiAutoCare/workshop/search','files' => 'true' ,'enctype' => 'multipart/form-data', 'autocomplete' => 'OFF']) }} 
         <div class="card">
           <div class="card-body">
-          <div class="table-responsive">
+          <div class="table-responsive"> 
           <table class="table table-sm">
             <tr>
               <td>Job/Workshop Id</td>
@@ -34,8 +34,11 @@
               <td>Customer Name</td>
               <td>:</td>
               <td><!-- <input type="text" class="form-control-sm" name="name"></td> -->
-                {{Form::text('name', isset($name)?$name: '', ['class' => 'form-control-sm form-control-sm ','id'=>'name', 'placeholder' => '  Job Name']  )}}
-              <td></td>
+              {{Form::select('customer_id', $customerNameSelect,isset($customer_id)?$customer_id: '', ['class' => 'form-control','id'=>'customer_id','placeholder'=>'Select Customer']  )}}
+                <td>&emsp;&emsp;</td>
+              <td>Mobile Number</td>
+              <td>:</td>
+              <td><input type="text" class="form-control-sm" name="mobile"></td>
             </tr>
             <tr>
               <td>From Date</td>
@@ -43,27 +46,28 @@
               <td><input type="date" class="form-control-sm" name="created_at_to"></td>
               <td>&emsp;&emsp;</td>
               <td>To Date</td>
-              <td>:</td>
-             
+              <td>:</td>             
               <td><input type="date" class="form-control-sm" name="created_at_from"></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Mobile Number</td>
-              <td>:</td>
-              <td><input type="text" class="form-control-sm" name="mobile"></td>
-              <td>&emsp;&emsp;</td>
+               <td>&emsp;&emsp;</td>
               <td>Email</td>
               <td>:</td>
               <td><input type="text"  class="form-control-sm" name="email"></td>
               <td></td>
             </tr>
+            
             <tr>
-              <td>&nbsp;</td>
-              <td colspan="2">Vehicle Registration Number</td>
-              <td>:</td>
+             
+              <td  style="white-space: nowrap">Vehicle Registration Number</td>  
+               <td>:</td>            
               <td><input type="text" class="form-control-sm" name="vehicle_reg_number_for_search"></td>
-              <td>&emsp;&emsp;</td>
+              <td>&emsp;</td>
+              <td  style="white-space: nowrap">Brand :</td>
+               <td>:</td>
+              <td> {{Form::select('brand',$brand_select,isset($brand)?$brand: '', ['class' => 'form-control ', 'placeholder' => 'Brand'] )}}</td>
+              <td>&emsp;</td>
+              <td  style="white-space: nowrap">Model </td>    
+              <td>:</td>         
+              <td> {{Form::select('model_number',$model_select,isset($model_number)?$model_number: '', ['class' => 'form-control ', 'placeholder' => 'Model Name'] )}}</td>
             </tr>
             <tr>
               <td colspan="8" class="text-center"><input type="submit" name="search" class="btn btn-primary" value="Search"></td>
@@ -492,6 +496,9 @@
 
 
   $(document).ready(function() {
+    $('[name="brand"]').select2();
+    $('[name="model_number"]').select2();
+    $('[name="customer_id"]').select2();
 
 
     $('.datepickerForPayment').datepicker({
@@ -717,6 +724,34 @@ $('#productDetail').append("<tr>\
 
 
   $(document).ready(function() {
+
+    $(document).on("change","[name^=brand]",function(){
+          var thisSelf=$(this);
+      var brand = $(this).val();
+      $.ajax({
+        type:"POST",
+        url: "{{url('/')}}/ajax/getModal",
+        data:{
+          "_token": "{{ csrf_token() }}",
+          brand : brand,
+        },
+        dataType : 'html',
+        cache: false,
+        success: function(data){
+          modalData=JSON.parse(data);
+          // console.log(modalData.id);
+          // console.log(modalData.model_name);
+             thisSelf.parent().parent().find('[name^=model_number]')
+                .empty()
+                .append('<option selected="selected" value="">-Select -</option>');
+                for (index = 0; index < modalData.length; ++index) {
+                $('[name^=model_number]').append(
+                '<option value="'+modalData[index]['id']+'">'+modalData[index]['model_name']+'</option>'
+              );   
+            }
+        }
+      });
+     }); 
 
    $(document).on("click","#payment",function(){
  

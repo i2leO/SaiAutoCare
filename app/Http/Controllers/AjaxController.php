@@ -130,6 +130,7 @@ class AjaxController extends Controller
         $Product=DB::table('products')
          ->where('company_name','=',$brand)
          ->where('model_number','=',$model_number)
+          ->where('products.deleted_at','=',null)
          ->distinct()
          ->get();
          return json_encode($Product);

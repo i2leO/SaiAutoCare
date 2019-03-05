@@ -223,7 +223,7 @@ border-radius: 15px 50px;
 
 						<td>:&nbsp;</td>
 
-						<td align="left">07683855014</td>
+						<td align="left">7978262599</td>
 
 					</tr>
 
@@ -271,7 +271,7 @@ border-radius: 15px 50px;
 
 						<td>:&nbsp;</td>
 
-						<td align="left">21ASGPA9327Q1Z1</td>
+						<td align="left">21ASGPS9327Q1Z1</td>
 
 					</tr>
 
@@ -858,10 +858,12 @@ border-radius: 15px 50px;
 								{{-- <th>Service Quantity</th> --}}
 
 								<th>Price</th>
+								@if($serviceGST==1)
 
-								<th>GST %</th>
+								<th >GST %</th>
 
 								<th>GST</th>
+								@endif
 
 								<th>Total Price</th>
 
@@ -871,7 +873,17 @@ border-radius: 15px 50px;
 
 						<tbody>
 
-							
+							@php
+							if($serviceGST==1)
+							{
+
+								$serviceGSTInPercentage=18;
+							}
+							else
+							{
+								$serviceGSTInPercentage=0;
+							}
+							@endphp
 
 							@foreach($WorkshopService as $value)
 
@@ -882,12 +894,16 @@ border-radius: 15px 50px;
 								{{-- <td>{{  $value->service_quantity }}</td>													 --}}
 
 								<td>{{  $value->service_price }}</td>
+								@if($serviceGST==1)
 
-								<td>18</td>
+									<td>{{ $serviceGSTInPercentage }}</td>
 
-								<td>{{ (($value->service_price*18)/100)*$value->service_quantity }}</td>
+								<td>{{ (($value->service_price*$serviceGSTInPercentage)/100)*$value->service_quantity }}</td>
+								@endif
 
-								<td>{{ (($value->service_price+(($value->service_price)*18)/100)*$value->service_quantity) }}</td>
+							
+
+								<td>{{ (($value->service_price+(($value->service_price)*$serviceGSTInPercentage)/100)*$value->service_quantity) }}</td>
 
 							</tr>
 
@@ -897,9 +913,9 @@ border-radius: 15px 50px;
 
 								// $gstPrice=$value->service_price*$value->service_quantity-(($value->service_price+(($value->service_price)*18)/100)*$value->service_quantity);
 
-							$total_service_price+=(($value->service_price+(($value->service_price)*18)/100)*$value->service_quantity);
+							$total_service_price+=(($value->service_price+(($value->service_price)*$serviceGSTInPercentage)/100)*$value->service_quantity);
 
-							$serviceGstPrice+= (($value->service_price*18)/100)*$value->service_quantity;
+							$serviceGstPrice+= (($value->service_price*$serviceGSTInPercentage)/100)*$value->service_quantity;
 
 							@endphp
 
@@ -1107,6 +1123,10 @@ $forPay=($total_product_price+$total_service_price)-($installmentPayment+$paid_p
 						{{-- <p colspan="1" align="right" ><b>Invoice Amount:</b> {{ $total_product_price+$total_service_price }}</p> --}}
 
 					</tr>
+					<tr>
+						<td align="left"><b>Account Details</b></td>
+					</tr>
+					<tr><td align="left">Name:-sai autocare;&emsp;Bank:-Indian oversease bank;&emsp; AC No:-106002000001013;&emsp;IFSC Code:-IOBA0001060;&emsp;Paytm no-9437284700</td></tr>
 
 				</tfoot>
 
