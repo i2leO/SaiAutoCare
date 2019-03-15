@@ -26,6 +26,7 @@ class ProductController extends Controller
         $viewData['option2'] = 'Add Product Detail'; 
         $viewData['optionValue2'] = "SaiAutoCare/product/add";
 
+
         $viewData['model_select'] = Modal::pluck('model_name', 'id');
 		$viewData['brand_select'] = Brand::pluck('brand_name', 'id');
         // This if condition for fill detail for update otherwise for save and update 
@@ -71,6 +72,9 @@ class ProductController extends Controller
      public function view(Request $request)
     {
     	   $viewData['header_link'] =  HeaderLink::where("menu_id",'3')->select("link_title","link_name")->orderBy('id','desc')->get();
+    	     $viewData['model_select'] = Modal::pluck('model_name', 'id');
+        $viewData['brand_select'] = Brand::pluck('brand_name', 'id');
+
     	if($request->isMethod('post'))
     	{
     		$viewData['pageTitle'] = 'Supplier';       	
@@ -90,12 +94,18 @@ class ProductController extends Controller
 			if($request->has('created_at_to') && $request->created_at_to !=''){
 				$Supplier->whereDate('products.created_at', '>=', $request->created_at_to);
 			}
-			if($request->has('model_number') && $request->model_number !=''){
-				$Supplier->where('mobile', '=', $request->model_number);
-			}
-			if($request->has('email') && $request->email !=''){
-				$Supplier->where('products.email', '=', $request->email);
-			}
+			// if($request->has('model_number') && $request->model_number !=''){
+			// 	$Supplier->where('mobile', '=', $request->model_number);
+			// }
+			// if($request->has('email') && $request->email !=''){
+			// 	$Supplier->where('products.email', '=', $request->email);
+			// }
+			if($request->has('brand') && $request->brand !=''){
+                $Supplier->where('products.company_name', '=', $request->brand);
+            }
+            if($request->has('model_number') && $request->model_number !=''){
+                 $Supplier->where('products.model_number', '=', $request->model_number);
+            }
 			$Supplier->orderBy('products.id','desc');
 			$Supplier->select('products.*','brands.brand_name as brand_name_from_brand','modals.model_name as model_name_from_modal' );
        		$Supplier= $Supplier->get();
@@ -125,6 +135,8 @@ class ProductController extends Controller
     public function trash(Request $request,$id)
     {
     	   $viewData['header_link'] =  HeaderLink::where("menu_id",'3')->select("link_title","link_name")->orderBy('id','desc')->get();
+    	    $viewData['model_select'] = Modal::pluck('model_name', 'id');
+        $viewData['brand_select'] = Brand::pluck('brand_name', 'id');
     	if(($id!=null) && (Product::where('id',$id)->delete())){
             $request->session()->flash('message.level', 'warning');
             $request->session()->flash('message.content', 'Product was Trashed!');

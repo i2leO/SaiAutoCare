@@ -348,6 +348,8 @@ class WorkshopController extends Controller
     public function trash(Request $request,$id)
     {
            $viewData['header_link'] =  HeaderLink::where("menu_id",'3')->select("link_title","link_name")->orderBy('id','desc')->get();
+            $viewData['model_select'] = Modal::pluck('model_name', 'id');
+        $viewData['brand_select'] = Brand::pluck('brand_name', 'id');
         if(($id!=null) && (Workshop::where('id',$id)->delete())){
             $request->session()->flash('message.level', 'warning');
             $request->session()->flash('message.content', 'Workshop was Trashed!');

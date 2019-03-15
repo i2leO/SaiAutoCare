@@ -265,6 +265,8 @@ class PurchaseController extends Controller
     public function view(Request $request)
     {
            $viewData['header_link'] =  HeaderLink::where("menu_id",'3')->select("link_title","link_name")->orderBy('id','desc')->get();
+             $viewData['model_select'] = Modal::pluck('model_name', 'id');
+        $viewData['brand_select'] = Brand::pluck('brand_name', 'id');
     	$getFormAutoFillup = array();
     	if($request->isMethod('post'))
     	{
@@ -297,8 +299,14 @@ class PurchaseController extends Controller
 			}
 			if($request->has('company_name') && $request->company_name !=''){
 				$getFormAutoFillup['company_name']=$request->company_name;
-				$purchase->where('brands.brand_name', 'like', '%'.$request->company_name.'%');
+				$purchase->where('purchases.brand_name', 'like', '%'.$request->company_name.'%');
 			}
+            if($request->has('brand') && $request->brand !=''){
+                $purchase->where('purchases.company_name', '=', $request->brand);
+            }
+            if($request->has('model_number') && $request->model_number !=''){
+                 $purchase->where('products.model_number', '=', $request->model_number);
+            }
 
 			 $purchase->select('purchases.*','products.product_name as product_name','suppliers.supplier_name as supplier_name_from_supplier','brands.brand_name as company_name_from_brand','modals.model_name as model_number');
 			$purchase->orderBy('bill_date','ASC');
@@ -335,6 +343,8 @@ class PurchaseController extends Controller
     public function trash(Request $request,$id)
     {
            $viewData['header_link'] =  HeaderLink::where("menu_id",'3')->select("link_title","link_name")->orderBy('id','desc')->get();
+            $viewData['model_select'] = Modal::pluck('model_name', 'id');
+        $viewData['brand_select'] = Brand::pluck('brand_name', 'id');
     	if(($id!=null) && (Purchase::where('id',$id)->delete())){
             $request->session()->flash('message.level', 'warning');
             $request->session()->flash('message.content', 'Purchase was Trashed!');

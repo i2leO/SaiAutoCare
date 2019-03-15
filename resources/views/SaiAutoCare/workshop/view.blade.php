@@ -142,7 +142,7 @@ border-radius: 15px 50px;
 
 <body>
 
-	<section style="margin-left: 30px;margin-right: 30px; margin-top: 30px">
+	<section style="margin-left: 30px;margin-right: 30px; margin-top: 10px">
 		<div style="height:80px;width:100% ;background-color: white;" class="grid-container">
 
 			<div  class="grid-item">
@@ -155,7 +155,9 @@ border-radius: 15px 50px;
 
 				{{-- <div style="width:270px;text-shadow: 3px 2px red;" align="right" class="logo"><b><i>Sai Auto Care</i></b></div> --}}
 
-				<div style="width:100%;text-shadow: 3px 2px red;" class="logo"><b><i>Sai Auto Care</i></b></div>
+				<div style="width:100%;text-shadow: 3px 2px red;" class="logo"><b><i>Sai Auto Care</i></b>
+				</div>
+				
 
 			</div>
 
@@ -171,7 +173,7 @@ border-radius: 15px 50px;
 
 		</div>
 
-		<div style="height:80px;width:100% ;background-color: white;" class="grid-container">
+		<div style="height:50px;width:100% ;background-color: white;" class="grid-container">
 
 			<div  class="grid-item">
 
@@ -179,7 +181,7 @@ border-radius: 15px 50px;
 
 			</div>
 
-			<div  class="grid-item word-wrap" style="word-break: break-all;font-size: 15px;">
+			<div  class="grid-item word-wrap" style="word-break: break-all;font-size: 11px;">
 
 				2376, Puri Bypass NH, Badagada, <br>
 
@@ -187,9 +189,9 @@ border-radius: 15px 50px;
 
 			</div>
 
-			<div  class="grid-item word-wrap" style="word-break: break-all;font-size: 15px;">
+			<div  class="grid-item word-wrap" style="word-break: break-all;font-size: 11px;">
 
-				&nbsp;
+			Printed Date :{{ date("Y/m/d") }}
 
 			</div>
 
@@ -203,7 +205,7 @@ border-radius: 15px 50px;
 
 			
 
-			<div  class="grid-item" style="font-size: 17px" align="left">
+			<div  class="grid-item" style="font-size: 13px" align="left">
 
 				<table>
 
@@ -251,7 +253,7 @@ border-radius: 15px 50px;
 			<div  class="grid-item">&emsp;</div>
 			<div  class="grid-item">&emsp;</div>
 
-			<div  class="grid-item word-wrap" style="font-size: 17px" align="right">
+			<div  class="grid-item word-wrap" style="font-size: 13px" align="right">
 
 				<table align="right">
 
@@ -303,19 +305,19 @@ border-radius: 15px 50px;
 
 		</div>
 
-		<hr>
+		
 
-		<div style="width:100% ;background-color: white;font-size: 19px" align="center"  ><b>Tax Invoice</b></div>
+		<div style="width:100% ;background-color: white;font-size: 19px" align="center"  ><b> Invoice</b></div>
 
-		<hr>
+		
 
 		<div style="width:100% ;background-color: white;" class="grid-container3" align="center"  >
 
-			<div  class="grid-item" style="font-size: 18px">
+			<div  class="grid-item" style="font-size: 12px;background-color: blanchedalmond;">
 
 						<table >
 
-								<tr>
+								{{-- <tr>
 
 							   		<td>&nbsp;</td>
 
@@ -327,7 +329,7 @@ border-radius: 15px 50px;
 
 							   		<td>&nbsp;</td>
 
-							   	</tr>
+							   	</tr> --}}
 
 								<tr>
 
@@ -343,7 +345,7 @@ border-radius: 15px 50px;
 
 							   	</tr>
 
-							   	<tr>
+							  {{--  	<tr>
 
 							   		<td>&nbsp;</td>
 
@@ -356,7 +358,7 @@ border-radius: 15px 50px;
 							   		<td>&nbsp;</td>
 
 							   	</tr>
-
+ --}}
 							   	<tr>
 
 							   		<td>&nbsp;</td>
@@ -399,7 +401,7 @@ border-radius: 15px 50px;
 
 							   	</tr>
 
-							   	<tr>
+							   {{-- 	<tr>
 
 							   		<td>&nbsp;</td>
 
@@ -411,7 +413,7 @@ border-radius: 15px 50px;
 
 							   		<td>&nbsp;</td>
 
-							   	</tr>
+							   	</tr> --}}
 
 							   	<tr>
 
@@ -441,7 +443,7 @@ border-radius: 15px 50px;
 
 							   	</tr>
 
-							   	<tr>
+							   	{{-- <tr>
 
 							   		<td>&nbsp;</td>
 
@@ -453,7 +455,7 @@ border-radius: 15px 50px;
 
 							   		<td>&nbsp;</td>
 
-							   	</tr>
+							   	</tr> --}}
 							   		<tr>
 
 							   		<td>&nbsp;</td>
@@ -462,7 +464,7 @@ border-radius: 15px 50px;
 
 							   		<td>:&nbsp;</td>
 
-							   		<td align="left">{{ number_format($installmentPayment,2) }}</td>
+							   		<td align="left">{{ number_format($installmentPayment+$paid_price,2) }}</td>
 
 							   		<td>&nbsp;</td>
 
@@ -520,7 +522,21 @@ border-radius: 15px 50px;
 							   	}	
 
 
+ 	if(isset($workshop_date))
 
+							   	{
+
+							   		$workshop_date = strtotime($workshop_date);  
+
+							   		$workshop_date = date('d/m/Y', $workshop_date);
+
+							   	}
+
+							   	else{
+
+							   		$workshop_date ="";
+
+							   	}	
 							   	 							   
 
 									$middle = strtotime(now());  
@@ -548,6 +564,22 @@ border-radius: 15px 50px;
 							   		<td>&nbsp;</td>
 
 							   	</tr>
+							   	
+							   		</tr>
+
+							   		{{-- <tr>
+
+							   		<td>&nbsp;</td>
+
+							   		<td style="white-space: nowrap" align="left">Workshop Date</td>
+
+							   		<td>:&nbsp;</td>
+
+							   		<td align="left">{{ $workshop_date }}</td>
+
+							   		<td>&nbsp;</td>
+
+							   	</tr> --}}
 
 								@php
 
@@ -563,13 +595,13 @@ border-radius: 15px 50px;
 
 			<div  class="grid-item">&emsp;</div>
 
-			<div  class="grid-item" style="font-size: 18px">
+			<div  class="grid-item" style="font-size: 12px; background-color: blanchedalmond;">
 
 				@php
 
-				if($is_workshop==1 )
+				// if($is_workshop==1 )
 
-				{
+				// {
 
 				@endphp
 
@@ -625,7 +657,7 @@ border-radius: 15px 50px;
 
 							   		<td>:&nbsp;</td>
 
-							   		<td  align="left">{{ $brandName }}</td>
+							   		<td  align="left">{{ isset($brandName)?$brandName:"" }}</td>
 
 							   		<td>&nbsp;</td>
 
@@ -639,13 +671,13 @@ border-radius: 15px 50px;
 
 							   		<td>:&nbsp;</td>
 
-							   		<td  align="left">{{ $model_numberName }}</td>
+							   		<td  align="left">{{ isset($model_numberName)?$model_numberName:""  }}</td>
 
 							   		<td>&nbsp;</td>
 
 							   	</tr>
 
-							   	<tr>
+							   	{{-- <tr>
 
 							   		<td>&nbsp;</td>
 
@@ -671,11 +703,11 @@ border-radius: 15px 50px;
 
 							   		<td>&nbsp;</td>
 
-							   	</tr>
+							   	</tr> --}}
 
 							   
 
-							   	<tr>
+							   {{-- 	<tr>
 
 							   		<td>&nbsp;</td>
 
@@ -701,7 +733,7 @@ border-radius: 15px 50px;
 
 							   		<td>&nbsp;</td>
 
-							   	</tr>
+							   	</tr> --}}
 
 							   	<tr>
 
@@ -751,7 +783,7 @@ border-radius: 15px 50px;
 
 							   </tr>
 
-							   		<tr>
+							   		{{-- <tr>
 
 							   		<td>&nbsp;</td>
 
@@ -763,7 +795,7 @@ border-radius: 15px 50px;
 
 							   		<td>&nbsp;</td>
 
-							   	</tr>
+							   	</tr> --}}
 
 							   	</tr>
 
@@ -785,7 +817,7 @@ border-radius: 15px 50px;
 
 					@php
 
-				}
+				// }
 
 				@endphp	
 
@@ -801,11 +833,11 @@ border-radius: 15px 50px;
 
 								  	@endphp
 
-		<div  style="width:100% ;background-color: white;">
+		<div  style="width:100% ;background-color: white;border: 1px solid #5d5a5a;">
+ {{-- style="border: 1px solid #5d5a5a;" --}}
+			<div style="background-color: #e0dfe6;"><b>Note: </b>{{ $notes }}<br></div>
 
-			<div style="border: 1px solid #5d5a5a;"><b>Note: </b>{{ $notes }}<br></div>
-
-			<div style="border: 1px solid  #5d5a5a;"><b>Submited Part: </b>{{ $submited_part }}<br></div>			
+			<div style="background-color: #e0dfe6;"><b>Submited Part: </b>{{ $submited_part }}<br></div>			
 
 		</div>
 
@@ -815,7 +847,7 @@ border-radius: 15px 50px;
 
 								  	@endphp
 
-		<hr>
+		{{-- <hr> --}}
 
 		<div  style="width:100% ;background-color: white;">
 
@@ -845,11 +877,11 @@ border-radius: 15px 50px;
 
 				<tr><td>
 
-					<div align="center"><b> Services Details </b></div>
+					<div align="center" style="background-color: #b2f7f7;"><b> Services Details </b></div>
 
-					<table    width="100%" border="1" >
+					<table    width="100%" border="0" >
 
-						<thead>
+						<thead style="background-color: lightcyan ;">
 
 							<tr>
 
@@ -945,11 +977,11 @@ border-radius: 15px 50px;
 
 				<tr><td>
 
-					<div align="center"><b> Spare Details </b></div>
+					<div align="center" style="background-color: #b2f7f7;"><b> Spare Details </b></div>
 
-					<table    width="100%" border="1">						
+					<table    width="100%" border="0">						
 
-						<thead>
+						<thead style="background-color:lightcyan ;">
 
 							<tr>
 
@@ -1104,7 +1136,7 @@ $forPay=($total_product_price+$total_service_price)-($installmentPayment+$paid_p
 
 					@endphp
 
-					<tr><td colspan="5"  ><p><b>Rupees:</b> {{ $numberTransformer->toWords($forPay) }}
+					<tr><td colspan="5" style="background-color: lightgoldenrodyellow;"  ><p><b>Rupees:</b> {{ $numberTransformer->toWords($forPay) }}
 
 						@php
 
@@ -1124,9 +1156,9 @@ $forPay=($total_product_price+$total_service_price)-($installmentPayment+$paid_p
 
 					</tr>
 					<tr>
-						<td align="left"><b>Account Details</b></td>
+						<td align="left" style="font-size: 13px"><b>Account Details:</b>(Name:-sai autocare;&emsp;Bank:-Indian oversease bank;&emsp; AC No:-106002000001013;&emsp;IFSC Code:-IOBA0001060;&emsp;Paytm no-9437284700)</td>
 					</tr>
-					<tr><td align="left">Name:-sai autocare;&emsp;Bank:-Indian oversease bank;&emsp; AC No:-106002000001013;&emsp;IFSC Code:-IOBA0001060;&emsp;Paytm no-9437284700</td></tr>
+					{{-- <tr><td align="left">Name:-sai autocare;&emsp;Bank:-Indian oversease bank;&emsp; AC No:-106002000001013;&emsp;IFSC Code:-IOBA0001060;&emsp;Paytm no-9437284700</td></tr> --}}
 
 				</tfoot>
 
@@ -1146,11 +1178,11 @@ $forPay=($total_product_price+$total_service_price)-($installmentPayment+$paid_p
 
 	</section>
 
-	<div  style="width:100% ; position: fixed left: 0;bottom: 0; width: 100%;" align="right">
+	{{-- <div  style="width:100% ; position: fixed left: 0;bottom: 0; width: 100%;" align="right">
 
 			<div style="width:100%; float: right;" align="right"><small>Printed Date :{{ date("Y/m/d") }}</small></div>
 
-		</div>
+		</div> --}}
 
 </body>
 

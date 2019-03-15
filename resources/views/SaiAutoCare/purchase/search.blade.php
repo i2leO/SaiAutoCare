@@ -26,7 +26,7 @@
           <tr>
             <td>Purchase Id</td>
             <td>:</td>
-            <td><!-- <input type="text" class="form-control-sm" name="id"> -->
+            <td>
                 {{Form::text('id', isset($id)?$id: '', ['class' => 'form-control-sm form-control-sm ','id'=>'id', 'placeholder' => ' Purchase Id']  )}}
             </td>
             <td>&emsp;&emsp;</td>
@@ -38,21 +38,24 @@
             <td>Product Name</td>
             <td>:</td>
             <td><input type="text" class="form-control-sm" name="product_name"></td>
-            <td></td>
-          </tr>
-          <tr>
             <td>Form Date</td>
             <td>:</td>           
             <td><input type="date" class="form-control-sm" name="created_at_to"></td>
             <td>&emsp;&emsp;</td>
-            <td>To Date</td>
-            <td>:</td>
-             <td><input type="date" class="form-control-sm" name="created_at_from"></td>
-            <td>&emsp;&emsp;</td>
-            <td>Brand Name</td>
-            <td>:</td>
-            <td><input type="text"  class="form-control-sm" name="company_name"></td>
-            <td></td>
+          </tr>
+          <tr>          
+          <td>To Date</td>
+          <td>:</td>
+          <td><input type="date" class="form-control-sm" name="created_at_from"></td>
+          <td>&emsp;&emsp;</td>
+          <td  style="white-space: nowrap">Brand :</td>
+          <td>:</td>
+          <td> {{Form::select('brand',$brand_select,isset($brand)?$brand: '', ['class' => 'form-control ', 'placeholder' => 'Brand'] )}}</td>
+          <td>&emsp;</td>
+          <td  style="white-space: nowrap">Model </td>    
+          <td>:</td>         
+          <td> {{Form::select('model_number',$model_select,isset($model_number)?$model_number: '', ['class' => 'form-control ', 'placeholder' => 'Model Name'] )}}</td>
+            </tr>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -245,7 +248,44 @@ $(document).on('click', '.openPayentModel', function(){
       }); 
 
 
+ 
+
+
   $(document).ready(function() {
+
+     $('[name="brand"]').select2();
+    $('[name="model_number"]').select2();
+    $('[name="customer_id"]').select2();
+
+     $(document).on("change","[name^=brand]",function(){
+          var thisSelf=$(this);
+      var brand = $(this).val();
+      $.ajax({
+        type:"POST",
+        url: "{{url('/')}}/ajax/getModal",
+        data:{
+          "_token": "{{ csrf_token() }}",
+          brand : brand,
+        },
+        dataType : 'html',
+        cache: false,
+        success: function(data){
+          modalData=JSON.parse(data);
+          // console.log(modalData.id);
+          // console.log(modalData.model_name);
+             thisSelf.parent().parent().find('[name^=model_number]')
+                .empty()
+                .append('<option selected="selected" value="">-Select -</option>');
+                for (index = 0; index < modalData.length; ++index) {
+                $('[name^=model_number]').append(
+                '<option value="'+modalData[index]['id']+'">'+modalData[index]['model_name']+'</option>'
+              );   
+            }
+        }
+      });
+     }); 
+
+
 
    $(document).on("click","#payment",function(){
  

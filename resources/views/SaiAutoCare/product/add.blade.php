@@ -62,7 +62,7 @@
         <div class="col-md-4">
           <div class="form-group">
           <label class="form-col-form-label" for="company_name">Brand Name</label>
-          {{Form::select('company_name',$brand_select,isset($company_name)?$company_name: '', ['class' => 'form-control selectTo form-control ', 'placeholder' => 'Brand Name'] )}}
+          {{Form::select('company_name',$brand_select,isset($company_name)?$company_name: '', ['class' => 'form-control selectTo form-control ','required' ,'placeholder' => 'Brand Name'] )}}
           <div class="invalid-feedback">
           {{ $errors->has('company_name') ? $errors->first('company_name', ':message') : '' }}
           </div>
@@ -71,7 +71,7 @@
         <div class="col-md-4">
           <div class="form-group">
           <label class="form-col-form-label" for="model_number">Model Name</label>
-          {{Form::select('model_number',$model_select,isset($model_number)?$model_number: '', ['class' => 'form-control selectTo form-control ', 'placeholder' => 'Model Name'] )}}
+          {{Form::select('model_number',$model_select,isset($model_number)?$model_number: '', ['class' => 'form-control selectTo form-control ', 'required' ,'placeholder' => 'Model Name'] )}}
           <div class="invalid-feedback">
           {{ $errors->has('model_number') ? $errors->first('model_number', ':message') : '' }}
           </div>
