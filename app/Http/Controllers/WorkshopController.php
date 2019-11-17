@@ -390,7 +390,10 @@ class WorkshopController extends Controller
         $viewData['header_link'] =  HeaderLink::where("menu_id",'3')->select("link_title","link_name")->orderBy('id','desc')->get();
         $getIndivisualWorkshopDetail = Workshop::whereId($id)->first()->toArray();
   
-        if($getIndivisualWorkshopDetail['is_workshop'] == 1)
+        // if($getIndivisualWorkshopDetail['is_workshop'] == 1)
+        // {
+        
+        if(isset($getIndivisualWorkshopDetail['brand']) && isset($getIndivisualWorkshopDetail['model_number']))
         {
              $brandName=Brand::whereId($getIndivisualWorkshopDetail['brand'])->first()->toArray();
             $model_number=Modal::whereId($getIndivisualWorkshopDetail['model_number'])->first()->toArray();

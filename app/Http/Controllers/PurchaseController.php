@@ -33,7 +33,7 @@ class PurchaseController extends Controller
         $viewData['optionValue2'] = "SaiAutoCare/product/add"; 
         
 
-        $viewData['supplier'] = Supplier::pluck('supplier_name', 'id');
+        $viewData['supplier'] = Supplier::orderBy('supplier_name', 'ASC')->pluck('supplier_name', 'id');
         $viewData['model_select'] = Modal::pluck('model_name', 'id');
         $viewData['brand_select'] = Brand::pluck('brand_name', 'id');
 
@@ -172,7 +172,7 @@ class PurchaseController extends Controller
         $viewData['header_link'] =  HeaderLink::where("menu_id",'3')->select("link_title","link_name")->orderBy('id','desc')->get();
     	$getFormAutoFillup = array();
         $viewData['pageTitle'] = 'Update Purchase Detail'; 
-        $viewData['supplier'] = Supplier::pluck('supplier_name', 'id');
+        $viewData['supplier'] = Supplier::orderBy('supplier_name', 'ASC')->pluck('supplier_name', 'id');
         $viewData['model_select'] = Modal::pluck('model_name', 'id');
         $viewData['brand_select'] = Brand::pluck('brand_name', 'id');
 	    	if ($request->isMethod('post')){	

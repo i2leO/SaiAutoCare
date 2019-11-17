@@ -80,6 +80,7 @@
                 <tr>
                   <th style="white-space: nowrap"> Id</th>
                   <th style="white-space: nowrap">Created Date</th>
+                  <th style="white-space: nowrap">Bill Date</th>
                   <th style="white-space: nowrap">Supplier Name</th>
                   <th style="white-space: nowrap">Supplier Email</th>
                   <th style="white-space: nowrap">Supplier Phone</th>
@@ -113,12 +114,31 @@
                     $totalDebit+=$value['debit_amount'];
                   }
                  @endphp
+                @php
+                 if(isset($value['bill_date']))
+                    {
+                      $bill_date = strtotime($value['bill_date']);
+                      $bill_date = date('d/m/Y', $bill_date);
+                    }
+                    else{
+                      $bill_date ="";
+                    } 
+                     if(isset($value['created_at']))
+                    {
+                      $created_at = strtotime($value['created_at']);
+                      $created_at = date('d/m/Y', $created_at);
+                    }
+                    else{
+                      $created_at ="";
+                    } 
+                @endphp
                 
                 
                 <tr>
                   
                   <td>{{ $value['id'] }}</td>
-                  <td>{{ $value['created_at'] }}</td>
+                  <td>{{ $created_at }}</td>
+                  <td>{{ $bill_date }}</td>
                   <td>{{ $value['SupplierName'] }}</td>
                   <td>{{ $value['supplierEmail'] }}</td>
                   <td>{{ $value['phoneNumber'] }}</td>

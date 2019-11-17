@@ -32,7 +32,7 @@ class ServiceController extends Controller
 			$viewData['brand_list'] = Brand::orderBy('created_at', 'desc')->paginate(5);;
 			$viewData['model_select'] = Modal::pluck('model_name', 'id');
 			$viewData['service_type_select'] = ServiceType::pluck('service_type_name', 'id');
-			$viewData['service_name_select'] = ServiceName::pluck('service_name', 'service_name');
+			$viewData['service_name_select'] = ServiceName::orderBy('service_name', 'asc')->pluck('service_name', 'service_name');
 			$viewData['brand_select'] = Brand::pluck('brand_name', 'id');
 
         // This if condition for fill detail for update otherwise for save and update 
@@ -86,7 +86,7 @@ class ServiceController extends Controller
 		$viewData['brand_list'] = Brand::orderBy('created_at', 'desc')->paginate(5);;
 		$viewData['model_select'] = Modal::pluck('model_name', 'id');
 		$viewData['service_type_select'] = ServiceType::pluck('service_type_name', 'id');
-		$viewData['service_name_select'] = ServiceName::pluck('service_name', 'service_name');
+		$viewData['service_name_select'] = ServiceName::orderBy('service_name', 'asc')->pluck('service_name', 'service_name');
 		$viewData['brand_select'] = Brand::pluck('brand_name', 'id');
 
         // This if condition for fill detail for update otherwise for save and update 

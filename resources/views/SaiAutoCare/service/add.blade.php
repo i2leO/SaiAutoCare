@@ -283,7 +283,7 @@
         <div class="col-md-4">
           <div class="form-grou">
           <label class="form-col-form-label" for="service_name">Service Name</label>
-          {{Form::select('service_name',$service_name_select,isset($service_name)?$service_name: '', ['class' => 'form-control form-control ', 'placeholder' => 'Service Name'] )}}
+          {{Form::select('service_name',$service_name_select,isset($service_name)?$service_name: '', ['class' => 'form-control form-control selectToJ1', 'placeholder' => 'Service Name'] )}}
           <div class="invalid-feedback">
           {{ $errors->has('service_name') ? $errors->first('service_name', ':message') : '' }}
           </div>
@@ -323,6 +323,12 @@
 </section>
 
 <script type = "text/javascript" language = "javascript">
+   $(document).ready(function() {
+
+   $('.selectToJ1').select2();
+  
+} );
+  
   $('#HideAll').on("click",function()
       {
          hide();

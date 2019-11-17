@@ -135,7 +135,7 @@ class SupplierCreditDebitLog extends Controller
             }
             
 
-            $supplerCreditDebitLog->select('supplier_debit_logs.*','suppliers.supplier_name as SupplierName','suppliers.email as supplierEmail','suppliers.mob_num as phoneNumber','brands.brand_name as company_name_from_brand','modals.model_name as modelNumber','products.product_name as productName','purchases.quantity as purchaseQuantity');
+            $supplerCreditDebitLog->select('supplier_debit_logs.*','suppliers.supplier_name as SupplierName','suppliers.email as supplierEmail','suppliers.mob_num as phoneNumber','purchases.bill_date as bill_date','brands.brand_name as company_name_from_brand','modals.model_name as modelNumber','products.product_name as productName','purchases.quantity as purchaseQuantity');
             $supplerCreditDebitLog->orderBy('created_at','ASC');
             $supplerCreditDebitLog= $supplerCreditDebitLog->get();
             $viewData['market']=json_decode(json_encode($supplerCreditDebitLog), true);
@@ -155,7 +155,7 @@ class SupplierCreditDebitLog extends Controller
 
 // $purchase->select('purchases.*','products.product_name as product_name','suppliers.supplier_name as supplier_name_from_supplier','brands.brand_name as company_name_from_brand','modals.model_name as model_number');
 
-            $supplerCreditDebitLog->select('supplier_debit_logs.*','suppliers.supplier_name as SupplierName','suppliers.email as supplierEmail','suppliers.mob_num as phoneNumber','brands.brand_name as company_name_from_brand','modals.model_name as modelNumber','products.product_name as productName','purchases.quantity as purchaseQuantity');
+            $supplerCreditDebitLog->select('supplier_debit_logs.*','suppliers.supplier_name as SupplierName','suppliers.email as supplierEmail','suppliers.mob_num as phoneNumber','purchases.bill_date as bill_date','brands.brand_name as company_name_from_brand','modals.model_name as modelNumber','products.product_name as productName','purchases.quantity as purchaseQuantity');
             $supplerCreditDebitLog->orderBy('supplier_debit_logs.created_at','ASC');
             $supplerCreditDebitLog= $supplerCreditDebitLog->get();
             $viewData['market']=json_decode(json_encode($supplerCreditDebitLog), true);

@@ -162,7 +162,7 @@
                        <a data-toggle="modal" id="{{ $value['id'] }}" data-target="#myModal"  class="btn btn-success openPayentModel btn-sm"><i class="fa fa-undo" aria-hidden="true"></i></a> 
                    <a href="{{ url('/')}}/SaiAutoCare/purchase/add/{{ $value['id'] }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> 
                    @if($role_id==1)
-                      <a href="{{ url('/')}}/SaiAutoCare/purchase/trash/{{ $value['id']}} " class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fa fa-remove"></i></a>
+                      <a style="display: none" href="{{ url('/')}}/SaiAutoCare/purchase/trash/{{ $value['id']}} " class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fa fa-remove"></i></a>
                     @endif
                   </td>
                 </tr>  

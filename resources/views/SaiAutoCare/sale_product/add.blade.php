@@ -121,12 +121,21 @@
           </div> 
            
           
-          <div class="col-md-3">           
+          <div class="col-md-3" style="display: none">           
               <label class="control-label"  for="reference">Reference:&emsp;</label>
               {{Form::text('reference',isset($reference)?$reference: '', ['class' => 'form-control', 'placeholder' => 'Reference'] )}}
               <div class="invalid-feedback">
                 {{ $errors->has('reference') ? $errors->first('reference', ':message') : '' }}
               </div>           
+          </div>
+           <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label"  for="brand">Brand:&emsp;</label>
+              {{Form::select('brand',$brand_select,isset($brand)?$brand: '', ['class' => 'form-control ', 'placeholder' => 'Brand'] )}}
+              <div class="invalid-feedback">
+              {{ $errors->has('brand') ? $errors->first('status', ':message') : '' }}
+              </div>
+            </div>
           </div> 
         </div>
          <div class="form-group row">
@@ -148,15 +157,24 @@
             </div>
          
         </div> 
-         <div class="col-md-3">
+         <div class="col-md-3" style="display: none">
         
-            <label class="control-label"  for="landline">Alternate Mobile Number:&emsp;</label>
+            <label class="control-label"  for="landline" >Alternate Mobile Number:&emsp;</label>
             {{Form::text('landline',isset($landline)?$landline: '', ['class' => 'form-control ', 'placeholder' => 'landline'] )}}
             <div class="invalid-feedback">
             {{ $errors->has('landline') ? $errors->first('landline', ':message') : '' }}
             </div>
          
         </div> 
+        <div class="col-md-3">
+                            <div class="form-group">
+                              <label class="control-label"  for="model_number">Model :&emsp;</label>
+                              {{Form::select('model_number',$model_select,isset($model_number)?$model_number: '', ['class' => 'form-control ', 'placeholder' => 'Model Name'] )}}
+                              <div class="invalid-feedback">
+                              {{ $errors->has('model_number') ? $errors->first('model_number', ':message') : '' }}
+                              </div>
+                            </div>
+                          </div> 
       </div>
         <div class="row">
           <div class="col-md-3">
@@ -338,24 +356,8 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <label class="control-label"  for="brand">Brand:&emsp;</label>
-                            {{Form::select('brand',$brand_select,isset($brand)?$brand: '', ['class' => 'form-control ', 'placeholder' => 'Brand'] )}}
-                            <div class="invalid-feedback">
-                            {{ $errors->has('brand') ? $errors->first('status', ':message') : '' }}
-                            </div>
-                          </div>
-                        </div>
-                          <div class="col-md-3">
-                            <div class="form-group">
-                              <label class="control-label"  for="model_number">Model :&emsp;</label>
-                              {{Form::select('model_number',$model_select,isset($model_number)?$model_number: '', ['class' => 'form-control ', 'placeholder' => 'Model Name'] )}}
-                              <div class="invalid-feedback">
-                              {{ $errors->has('model_number') ? $errors->first('model_number', ':message') : '' }}
-                              </div>
-                            </div>
-                          </div> 
+                       
+                          
                 </div>
 
       </div>

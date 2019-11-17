@@ -231,6 +231,12 @@ class AjaxController extends Controller
             $total_amount=$purchaseDetail['total_amount'];
             $gst=$purchaseDetail['gst'];
             $product_id=$purchaseDetail['product_id'];
+             $getProductDetail=Product::whereId($product_id)->first()->toArray();
+                    $stock_in1= $getProductDetail['stock_in'];
+                    $stock_out1  = $getProductDetail['stock_out'];
+                    $available=$stock_in1-$stock_out1;
+            if($available>=$request->quantity)
+            {
                 if($quantity>=$request->quantity)
                 {
                     $purchaseManame['quantity']=$quantity-$request->quantity;
@@ -264,6 +270,7 @@ class AjaxController extends Controller
                 {
                     return 0;  
                 }
+            }    
 
                                      
     }

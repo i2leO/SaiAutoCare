@@ -204,7 +204,13 @@
                  <!--  <td>{{ $value['reference'] }}</td>
                   <td>{{ $value['company'] }}</td>
                   <td>{{ $value['gst_no'] }}</td> -->
-                  <td>{{ (string)$value['mobile'] }}<small><small><small>.</small></small></small></td>
+                  <td>@php
+                     if(isset($value['mobile']))
+                    {
+                      echo "+91".(string)$value['mobile'];
+                    }
+                    @endphp
+                 </td>
                   <td>{{ $value['email'] }}</td>
                  <!--  <td>{{ $value['address'].",
                   ".$value['city'].",
@@ -256,7 +262,7 @@
 
                      @endif
                      @if($role_id==1)
-                      <a href="{{ url('/')}}/SaiAutoCare/workshop/trash/{{ $value['id']}} " class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fa fa-remove"></i></a>
+                      <a style="display: none" href="{{ url('/')}}/SaiAutoCare/workshop/trash/{{ $value['id']}} " class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fa fa-remove"></i></a>
                       @endif
                   </td>
                 </tr>  

@@ -132,8 +132,8 @@
                   <td>{{ $value['created_at'] }}</td>
                   <td>{{ $value['updated_at'] }}</td>
                   <td style="white-space: nowrap">
-                   <a href="{{ url('/')}}/SaiAutoCare/product/add/{{ $value['id'] }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> 
-                      <a href="{{ url('/')}}/SaiAutoCare/product/trash/{{ $value['id']}} " class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fa fa-remove"></i></a>
+                   <a  href="{{ url('/')}}/SaiAutoCare/product/add/{{ $value['id'] }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> 
+                      <a style="display: none" href="{{ url('/')}}/SaiAutoCare/product/trash/{{ $value['id']}} " class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fa fa-remove"></i></a>
                   </td>
                 </tr>  
                 @endforeach
